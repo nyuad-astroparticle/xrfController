@@ -1,0 +1,173 @@
+{
+  "MCA_Devices": [
+    {
+      "conn": {
+        "bus_type": "USB",
+        "daisy_chain_node": 0,
+        "device_number": 0,
+        "vme_base_address": 0
+      },
+      "pha": [
+         {
+          "data": {
+            "digitization": {
+              "dc_offset": 92.0,
+              "decimation": "1 sample average",
+              "dynamic_range": "Up to 0.6 Vpp",
+              "polarity": "Positive"
+            },
+            "trapezoid": {
+              "base_holdoff": 1000,
+              "base_samples": "256 samples average",
+              "decay_tc": 8000,
+              "flat_top": 1000,
+              "peak_delay": 800,
+              "peak_holdoff": 1000,
+              "peak_samples": "4 samples average",
+              "rise_time": 2000,
+              "gain" : 0.5
+            },
+            "trigger": {
+              "holdoff": 1500,
+              "rise_time": 300,
+              "smoothing_samples": "16 samples average",
+              "threshold": 500
+            }
+          },
+          "metadata": {
+            "Associated_Detector_ID": 0,
+            "Calibration_Parameter_Order_0": 0.0,
+            "Calibration_Parameter_Order_1": 1.0,
+            "Calibration_Parameter_Order_2": 0.0,
+            "Input_Channel_ID": 0
+          }
+        },
+	{
+          "data": {
+            "digitization": {
+              "dc_offset": 92.0,
+              "decimation": "1 sample average",
+              "dynamic_range": "Up to 0.6 Vpp",
+              "polarity": "Positive"
+            },
+            "trapezoid": {
+              "base_holdoff": 1000,
+              "base_samples": "256 samples average",
+              "decay_tc": 8000,
+              "flat_top": 1000,
+              "peak_delay": 800,
+              "peak_holdoff": 1000,
+              "peak_samples": "4 samples average",
+              "rise_time": 2000,
+              "gain" : 0.5
+            },
+            "trigger": {
+              "holdoff": 1500,
+              "rise_time": 300,
+              "smoothing_samples": "16 samples average",
+              "threshold": 500
+            }
+          },
+          "metadata": {
+            "Associated_Detector_ID": 1,
+            "Calibration_Parameter_Order_0": 0.0,
+            "Calibration_Parameter_Order_1": 1.0,
+            "Calibration_Parameter_Order_2": 0.0,
+            "Input_Channel_ID": 1
+          }
+        }
+      ],
+      "sync_mode": 0
+    }
+  ],
+  "data_output": {
+    "base_filename": "BASEFILENAME",
+    "filepath": "/home/xrf/maxrf/data",
+    "format": "XML-Hypercube",
+    "include_channel_calibration_parameters": false,
+    "include_channel_max_spectra": false,
+    "include_channel_sum_spectra": false,
+    "include_channel_total_counts": false,
+    "timestamp_data_files": true
+  },
+  "header_info": {
+    "collimator": {
+      "Diameter": 0.8,
+      "Distance Unit": "mm",
+      "Material": "Bronze"
+    },
+    "detectors": [
+      {
+        "bias_voltage": -115.0,
+        "detector_area": 25.0,
+        "detector_id": 0,
+        "detector_name": "Channel 0",
+        "detector_thickness": 1.0,
+        "make": "Amptek",
+        "model": "AXR/PA-230",
+        "operating_temperature": 240.0,
+        "sn": "NA",
+        "tipology": "SDD",
+        "window_material": "Beryllium",
+        "window_thickness": 100.0
+      },
+      {
+        "bias_voltage": -115.0,
+        "detector_area": 25.0,
+        "detector_id": 1,
+        "detector_name": "Channel 1",
+        "detector_thickness": 1.0,
+        "make": "Amptek",
+        "model": "AXR/PA-230",
+        "operating_temperature": 240.0,
+        "sn": "NA",
+        "tipology": "SDD",
+        
+        "window_material": "Beryllium",
+        "window_thickness": 100.0
+      } 
+    ],
+    "helium_flow_engaged": BASEHELIUM,
+    "instrument_operator": "NA",
+    "notes": "None",
+    "sample_description": "Test sample",
+    "sample_id": "NA",
+    "telemeter_engaged": false,
+    "xray_tube": {
+      "Anode Current": 30.0,
+      "Anode Material": "Molybdenum",
+      "Controller": "FTC-200",
+      "Current Unit": "uA",
+      "Make": "MOXTEK",
+      "Model": "TUB00046-MO5",
+      "SN": "NA",
+      "Tube Voltage": 30.0,
+      "Voltage Unit": "kV"
+    }
+  },
+  "params": {
+    "Mode": "BASESCANTYPE",
+    "Point_Spectrum": {
+      "Acquisition_Time": BASETIME,
+      "Save_Refresh_Time": 0
+    },
+    "Raster_Scan": {
+      "bottom_right_corner_x_stage_coord": 100.0,
+      "bottom_right_corner_y_stage_coord": 100.0,
+      "cell_size": 0.5,
+      "direction": "left-to-right",
+      "horizontal_retrace": false,
+      "raster_speed": 5,
+      "sync": {
+        "enable_hardware_delay_corrections": true,
+        "enable_motor_acceleration_corrections": true,
+        "enable_software_latency_corrections": false,
+        "enable_transmission_time_corrections": true,
+        "sync_method": "software"
+      },
+      "top_left_corner_x_stage_coord": 90.0,
+      "top_left_corner_y_stage_coord": 90.0
+    },
+    "Spectrum_Channels": 16384
+  }
+}
