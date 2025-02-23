@@ -38,12 +38,20 @@ def runner():
     
     # Getting input parameters
     print(colored("Welcome to the XRF Contorl Interface \n", 'green'))
-    filename    = input(colored("Please enter filename: ", 'blue'))
-    scanType    = input(colored("Please enter scantype: ", 'blue')).lower()
-    if scanType != 'point':
-        print(colored("Sorry, raster scans are not supported right now", 'red'))
+    filename    = input(colored("Please enter filename: ", 'blue')).strip()
+    scanType    = input(colored("Please enter scantype: ", 'blue')).lower().strip()
+    if scanType != 'point' and scantype!= 'raster':
+        print(colored("Sorry, I don't understand that scan type", 'red'))
         return()
-    time        = input(colored("Please enter scan duration in seconds: ", 'blue'))
+    if scanType == 'raster':
+        bottomRightX = input(colored('Bottom right X coordinate: ', 'blue'))
+        bottomRightY = input(colored('Bottom right Y coordinate: ', 'blue'))
+        TopLeftX     = input(colored('Top left X coordinate: ', 'blue'))
+        TopLeftY     = input(colored('Top left Y coordinate: ', 'blue'))
+        cellSize     = input(colored('Cell size (default 0.5): '), 'blue')
+        rasterSpeed  = input(colored('Raster Speed (default 5)'), 'blue')
+    if scanType == 'point':
+        time         = input(colored("Please enter scan duration in seconds: ", 'blue'))
     helium      = input(colored("Should Helium be turned on? (y/n) (default n): ", 'blue'))
 
     #Setting input parameters
@@ -56,6 +64,16 @@ def runner():
 
     if scanType == 'point':
         filedata = filedata.replace("BASESCANTYPE", "Point Spectrum")
+    if scanType == 'raster':
+        filedata = filedata.replace("BAESCANTYPE", "Raster Spectrum")
+        filedata = filedata.replace("BASEBOTTOMRIGHTX", bottomRightX)
+        filedata = filedata.replace("BASEBOTTOMRIGHTY", bottomRightY)
+        filedata = filedata.replace("BASETOPLEFTX", TopLeftX)
+        filedata = filedata.replace("BASETOPLEFTY", TopLeftY)
+        filedata = filedata.replace("BASECELLSIZE", cellSize)
+        filedata = filedata.replace("BASERASTERSPEED", rasterSpeed)
+
+
 
     filedata = filedata.replace("BASETIME", time)
 
