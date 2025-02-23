@@ -45,7 +45,7 @@ def runner():
     printBanner()
     
     # Getting input parameters
-    print(colored("Welcome to the XRF Contorl Interface \n", 'green'))
+    print(colored("Welcome to the XRF Control Interface \n", 'green'))
     filename    = input(colored("Please enter filename: ", 'blue')).strip()
     scanType    = input(colored("Please enter scantype: ", 'blue')).lower().strip()
     if scanType != 'point' and scanType!= 'raster':
