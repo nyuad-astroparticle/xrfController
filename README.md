@@ -18,7 +18,7 @@ Here is a list of fields and their expected values
 
 |Field          | Expected input                                            |
 |---------------|-----------------------------------------------------------|
-|Name           | string                                                    |
+|filename       | string                                                    |
 |scanType       | either ```point``` or ```raster```                        |
 |time           | Int. Time in seconds (only for point scan). Defaults to 10|
 |bottomRightX   | Float. (only for raster). Defaults to 100.0               |
@@ -36,6 +36,7 @@ The next screen shows all the values supplied by the user to let them double che
 The program runs a sanity check when doing raster scans if anything looks off. The warnings currently trigger if:
 
 - ```BottomRightX``` is smaller than ```TopLeftX``` or ```BottomRightY``` is smaller than ```TopLeftY```
+- If any of the coordinate fields, cell size, or raster speed are not numbers
 - ```cellSize``` does not neatly divide either the image width or height. I don't know if the ```daq_daemon``` would be fine if the division was not neat, but I don't know for sure, and I don't think you'd want to run the program if the division was not neat, so the program lets you know anyway
 
 The program then prompts the user if they want to continue. if the user says yes, then the program calls ```daq_daemon``` with ```out.json``` and prints the output of ```daq_daemon``` as it runs.
