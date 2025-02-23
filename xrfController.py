@@ -61,6 +61,18 @@ def runner():
     if scanType == 'point':
         time         = input(colored("Please enter scan duration in seconds: ", 'blue'))
     helium      = input(colored(f"Should Helium be turned on? (y/n) (default {HELIUMDEFAULT}): ", 'blue'))
+    
+    #Setting defaults
+    
+    if scanType == 'raster':
+        if cellSize == '':
+            cellSize = CELLSIZEDEFAULT
+        if rasterSpeed == '':
+            rasterSpeed = RASTERSPEEDDEFAULT
+    if helium == 'y':
+        helium = 'true'
+    else:
+        helium = HELIUMDEFAULT
 
     #Setting input parameters
 
@@ -73,33 +85,39 @@ def runner():
     if scanType == 'point':
         filedata = filedata.replace("BASETIME", time)
         filedata = filedata.replace("BASESCANTYPE", "Point Spectrum")
+        filedata = filedata.replace("BASEBOTTOMRIGHTX", '100.0') # All of these are to make sure the out.json file is corrctly formatted
+        filedata = filedata.replace("BASEBOTTOMRIGHTY", '100.0')
+        filedata = filedata.replace("BASETOPLEFTX", '0.0')
+        filedata = filedata.replace("BASETOPLEFTY", '0.0')
+        filedata = filedata.replace("BASECELLSIZE", CELLSIZEDEFAULT)
+        filedata = filedata.replace("BASERASTERSPEED", RASTERSPEEDDEFAULT)
     if scanType == 'raster':
         filedata = filedata.replace("BASESCANTYPE", "Raster Spectrum")
         filedata = filedata.replace("BASEBOTTOMRIGHTX", bottomRightX)
         filedata = filedata.replace("BASEBOTTOMRIGHTY", bottomRightY)
         filedata = filedata.replace("BASETOPLEFTX", TopLeftX)
         filedata = filedata.replace("BASETOPLEFTY", TopLeftY)
-        filedata = filedata.replace("BASETIME", '1')  #This it to make sure that the output json file is formatted correctly. 
-                                                    #I don't know if it makes a difference 
-        if cellSize == '':
-            filedata = filedata.replace("BASECELLSIZE", '0.5')
-        else:
-            filedata = filedata.replace("BASECELLSIZE", cellSize)
-        if rasterSpeed == '':
-            filedata = filedata.replace("BASERASTERSPEED", '5')
-        else:
-            filedata = filedata.replace("BASERASTERSPEED", rasterSpeed)
-    if helium == 'y':
-        filedata = filedata.replace("BASEHELIUM", 'true')
-    else:
-        filedata = filedata.replace("BASEHELIUM", HELIUMDEFAULT)
+        filedata = filedata.replace("BASECELLSIZE", cellSize)
+        filedata = filedata.replace("BASERASTERSPEED", rasterSpeed)
+        filedata = filedata.replace("BASETIME", '1')    #This it to make sure that the output json file is formatted correctly. 
+                                                        #I don't know if it makes a difference 
+    filedata = filedata.replace("BASEHELIUM", helium)
 
     with open(f'{PROGRAMDIR}out.json', 'w') as file:
         file.write(filedata)
     
     os.system("clear")
     printBanner()
-    
+
+    # Sanity checks
+
+    if scanType == 'raster':
+        if float(bottomRightX) < float(TopLeftX):
+            print(colored('WARNING: BOTTOM RIGHT X COORDINATE IS SMALLER THAN TOP LEFT X COORDINATE', 'yellow'))
+        if float(bottomRightY) < float(TopLeftY):
+            print(colored('WARNING: BOTTOM RIGHT Y COORDINATE IS SMALLER THAN TOP LEFT Y COORDINATE', 'yellow'))
+        if ((float(bottomRightY) - float(TopLeftY)) % float(cellSize) != 0) or ((float(bottomRightX) - float(TopLeftX)) % float(cellSize) != 0):
+            print(colored("WARNING: IMAGE SIZE IS NOT DIVISIBLE BY CELL SIZE", 'yellow'))
     #Confirming input parameters
 
     print(colored('Name:                      ', 'blue'), colored(f'{filename}', 'red'))
@@ -111,9 +129,9 @@ def runner():
         print(colored("Bottom Right Y Coordinate: ", 'blue'), colored(f'{bottomRightY}', 'red'))
         print(colored("Top Left X Coordinate    : ", 'blue'), colored(f'{TopLeftX}', 'red'))
         print(colored("Top Left Y Coordinate    : ", 'blue'), colored(f'{TopLeftY}', 'red'))
-        print(colored("Cell Size                : ", 'blue'), colored(f'{cellSize if cellSize != "" else CELLSIZEDEFAULT}', 'red'))
-        print(colored("Raster Speed             : ", 'blue'), colored(f'{rasterSpeed if rasterSpeed != "" else RASTERSPEEDDEFAULT}', 'red'))
-    print(colored('Helium:                    ', 'blue'), colored(f'{"True" if helium == "y" else "False"}', 'red'))
+        print(colored("Cell Size                : ", 'blue'), colored(cellSize, 'red'))
+        print(colored("Raster Speed             : ", 'blue'), colored(rasterSpeed, 'red'))
+    print(colored('Helium:                    ', 'blue'), colored(helium, 'red'))
 
 
 
