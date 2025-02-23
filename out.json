@@ -148,7 +148,7 @@
   "params": {
     "Mode": "Point Spectrum",
     "Point_Spectrum": {
-      "Acquisition_Time": 1,
+      "Acquisition_Time": 5,
       "Save_Refresh_Time": 0
     },
     "Raster_Scan": {
