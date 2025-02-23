@@ -137,34 +137,35 @@ def runner():
 
 
     response = input(colored('Continue (y/n)?: ', 'blue'))
+
     if response == 'y':
         os.system(f'source /home/xrf/maxrf/this-iba-imaging.sh && daq_daemon {PROGRAMDIR}out.json') # Running daq_daeon with new json file
         print(colored("Scan done!", 'green'))
 
         # Adding image info tag to the output files
-
-        response2 = input(colored("Would you like to modify the output files? (y/n): ", 'blue'))
-        if response2 == 'y':
-            with open(f"{DATADIR}{filename}_detector1.xhyperc", 'r') as file:
-                filedata = file.readlines()
-            filedata.insert(9, "<Image_Info> \n")
-            filedata.insert(10, "<Width>1</Width> \n")
-            filedata.insert(11, "<Height>1</Height> \n")
-            filedata.insert(12, "<Pixels>1</Pixels> \n")
-            filedata.insert(13, "</Image_Info> \n")
-            with open(f"{DATADIR}{filename}_detector1.xhyperc", 'w') as file:
-                filedata = "".join(filedata)
-                file.write(filedata)
-            with open(f"{DATADIR}{filename}_detector0.xhyperc", 'r') as file:
-                filedata = file.readlines()
-            filedata.insert(9, "<Image_Info> \n")
-            filedata.insert(10, "<Width>1</Width> \n")
-            filedata.insert(11, "<Height>1</Height> \n")
-            filedata.insert(12, "<Pixels>1</Pixels> \n")
-            filedata.insert(13, "</Image_Info> \n")
-            with open(f"{DATADIR}{filename}_detector0.xhyperc", 'w') as file:
-                filedata = "".join(filedata)
-                file.write(filedata)
+        if scanType == 'point':    
+            response2 = input(colored("Would you like to modify the output files? (y/n): ", 'blue'))
+            if response2 == 'y':
+                with open(f"{DATADIR}{filename}_detector1.xhyperc", 'r') as file:
+                    filedata = file.readlines()
+                filedata.insert(9, "<Image_Info> \n")
+                filedata.insert(10, "<Width>1</Width> \n")
+                filedata.insert(11, "<Height>1</Height> \n")
+                filedata.insert(12, "<Pixels>1</Pixels> \n")
+                filedata.insert(13, "</Image_Info> \n")
+                with open(f"{DATADIR}{filename}_detector1.xhyperc", 'w') as file:
+                    filedata = "".join(filedata)
+                    file.write(filedata)
+                with open(f"{DATADIR}{filename}_detector0.xhyperc", 'r') as file:
+                    filedata = file.readlines()
+                filedata.insert(9,  "<Image_Info> \n")
+                filedata.insert(10, "<Width>1</Width> \n")
+                filedata.insert(11, "<Height>1</Height> \n")
+                filedata.insert(12, "<Pixels>1</Pixels> \n")
+                filedata.insert(13, "</Image_Info> \n")
+                with open(f"{DATADIR}{filename}_detector0.xhyperc", 'w') as file:
+                    filedata = "".join(filedata)
+                    file.write(filedata)
             response3 = input(colored("Open maxrf-spectra? (y/n): ", 'blue'))
             if response3 == 'y':
                 os.system('source /home/xrf/maxrf/this-iba-imaging.sh && maxrf-spectra')
