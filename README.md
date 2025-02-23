@@ -8,5 +8,7 @@ Python scripts to control the XRF
 
 ## Usage 
 To run the utility, run the following command in a terminal on the XRF computer:
-```xrfCommand```
+```
+xrfController
+```
 No need to source anything!
