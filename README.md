@@ -7,4 +7,6 @@ Python scripts to control the XRF
 - termcolor: Needed for colour output
 
 ## Usage 
-
+To run the utility, run the following command in a terminal on the XRF computer:
+```xrfCommand```
+No need to source anything!
