@@ -127,7 +127,7 @@
         "window_thickness": 100.0
       } 
     ],
-    "helium_flow_engaged": false,
+    "helium_flow_engaged": true,
     "instrument_operator": "NA",
     "notes": "None",
     "sample_description": "Test sample",
@@ -146,18 +146,18 @@
     }
   },
   "params": {
-    "Mode": "Point Spectrum",
+    "Mode": "Raster Spectrum",
     "Point_Spectrum": {
-      "Acquisition_Time": 5,
+      "Acquisition_Time": 1,
       "Save_Refresh_Time": 0
     },
     "Raster_Scan": {
-      "bottom_right_corner_x_stage_coord": 100.0,
-      "bottom_right_corner_y_stage_coord": 100.0,
-      "cell_size": 0.5,
+      "bottom_right_corner_x_stage_coord": 100,
+      "bottom_right_corner_y_stage_coord": 100,
+      "cell_size": 1,
       "direction": "left-to-right",
       "horizontal_retrace": false,
-      "raster_speed": 5,
+      "raster_speed": 10,
       "sync": {
         "enable_hardware_delay_corrections": true,
         "enable_motor_acceleration_corrections": true,
@@ -165,8 +165,8 @@
         "enable_transmission_time_corrections": true,
         "sync_method": "software"
       },
-      "top_left_corner_x_stage_coord": 90.0,
-      "top_left_corner_y_stage_coord": 90.0
+      "top_left_corner_x_stage_coord": 0.0,
+      "top_left_corner_y_stage_coord": 0.0
     },
     "Spectrum_Channels": 16384
   }

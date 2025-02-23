@@ -3,12 +3,12 @@ import os
 import time
 from termcolor import colored
 
-PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
-DATADIR     = '/home/xrf/maxrf/data/' 
+#PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
+#DATADIR     = '/home/xrf/maxrf/data/' 
 
 
-#PROGRAMDIR   = '/home/danish/Documents/xrfController/'
-#DATADIR     = '/home/danish/Documents/testData/' 
+PROGRAMDIR   = '/home/danish/Documents/xrfController/'
+DATADIR     = '/home/danish/Documents/testData/' 
 
 CELLSIZEDEFAULT     = '0.5'
 RASTERSPEEDDEFAULT  = '5'
