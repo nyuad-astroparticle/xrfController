@@ -112,12 +112,19 @@ def runner():
     # Sanity checks
 
     if scanType == 'raster':
-        if float(bottomRightX) < float(TopLeftX):
-            print(colored('WARNING: BOTTOM RIGHT X COORDINATE IS SMALLER THAN TOP LEFT X COORDINATE', 'yellow'))
-        if float(bottomRightY) < float(TopLeftY):
-            print(colored('WARNING: BOTTOM RIGHT Y COORDINATE IS SMALLER THAN TOP LEFT Y COORDINATE', 'yellow'))
-        if ((float(bottomRightY) - float(TopLeftY)) % float(cellSize) != 0) or ((float(bottomRightX) - float(TopLeftX)) % float(cellSize) != 0):
-            print(colored("WARNING: IMAGE SIZE IS NOT DIVISIBLE BY CELL SIZE", 'yellow'))
+        try:
+            if float(bottomRightX) < float(TopLeftX):
+                print(colored('WARNING: BOTTOM RIGHT X COORDINATE IS SMALLER THAN TOP LEFT X COORDINATE!!', 'yellow'))
+            if float(bottomRightY) < float(TopLeftY):
+                print(colored('WARNING: BOTTOM RIGHT Y COORDINATE IS SMALLER THAN TOP LEFT Y COORDINATE!!', 'yellow'))
+            if ((float(bottomRightY) - float(TopLeftY)) % float(cellSize) != 0) or ((float(bottomRightX) - float(TopLeftX)) % float(cellSize) != 0):
+                print(colored("WARNING: IMAGE SIZE IS NOT DIVISIBLE BY CELL SIZE", 'yellow'))
+        except:
+            print(colored('WARNING: CHECK THAT YOUR COORDINATES AND CELL SIZE ARE NUMBERS!!', 'yellow'))
+        try:
+            test = float(rasterSpeed)
+        except:
+            print(colored('WARNING: CHECK THAT YOUR RASTER SPEED IS A NUMBER!!', 'yellow'))
     #Confirming input parameters
 
     print(colored('Name:                      ', 'blue'), colored(f'{filename}', 'red'))

@@ -112,12 +112,19 @@ def runner():
     # Sanity checks
 
     if scanType == 'raster':
-        if float(bottomRightX) < float(TopLeftX):
-            print(colored('WARNING: BOTTOM RIGHT X COORDINATE IS SMALLER THAN TOP LEFT X COORDINATE', 'yellow'))
-        if float(bottomRightY) < float(TopLeftY):
-            print(colored('WARNING: BOTTOM RIGHT Y COORDINATE IS SMALLER THAN TOP LEFT Y COORDINATE', 'yellow'))
-        if ((float(bottomRightY) - float(TopLeftY)) % float(cellSize) != 0) or ((float(bottomRightX) - float(TopLeftX)) % float(cellSize) != 0):
-            print(colored("WARNING: IMAGE SIZE IS NOT DIVISIBLE BY CELL SIZE", 'yellow'))
+        try:
+            if float(bottomRightX) < float(TopLeftX):
+                print(colored('WARNING: BOTTOM RIGHT X COORDINATE IS SMALLER THAN TOP LEFT X COORDINATE!!', 'yellow'))
+            if float(bottomRightY) < float(TopLeftY):
+                print(colored('WARNING: BOTTOM RIGHT Y COORDINATE IS SMALLER THAN TOP LEFT Y COORDINATE!!', 'yellow'))
+            if ((float(bottomRightY) - float(TopLeftY)) % float(cellSize) != 0) or ((float(bottomRightX) - float(TopLeftX)) % float(cellSize) != 0):
+                print(colored("WARNING: IMAGE SIZE IS NOT DIVISIBLE BY CELL SIZE", 'yellow'))
+        except:
+            print(colored('WARNING: CHECK THAT YOUR COORDINATES AND CELL SIZE ARE NUMBERS!!', 'yellow'))
+        try:
+            test = float(rasterSpeed)
+        except:
+            print(colored('WARNING: CHECK THAT YOUR RASTER SPEED IS A NUMBER!!', 'yellow'))
     #Confirming input parameters
 
     print(colored('Name:                      ', 'blue'), colored(f'{filename}', 'red'))
@@ -137,34 +144,35 @@ def runner():
 
 
     response = input(colored('Continue (y/n)?: ', 'blue'))
+
     if response == 'y':
         os.system(f'source /home/xrf/maxrf/this-iba-imaging.sh && daq_daemon {PROGRAMDIR}out.json') # Running daq_daeon with new json file
         print(colored("Scan done!", 'green'))
 
         # Adding image info tag to the output files
-
-        response2 = input(colored("Would you like to modify the output files? (y/n): ", 'blue'))
-        if response2 == 'y':
-            with open(f"{DATADIR}{filename}_detector1.xhyperc", 'r') as file:
-                filedata = file.readlines()
-            filedata.insert(9, "<Image_Info> \n")
-            filedata.insert(10, "<Width>1</Width> \n")
-            filedata.insert(11, "<Height>1</Height> \n")
-            filedata.insert(12, "<Pixels>1</Pixels> \n")
-            filedata.insert(13, "</Image_Info> \n")
-            with open(f"{DATADIR}{filename}_detector1.xhyperc", 'w') as file:
-                filedata = "".join(filedata)
-                file.write(filedata)
-            with open(f"{DATADIR}{filename}_detector0.xhyperc", 'r') as file:
-                filedata = file.readlines()
-            filedata.insert(9, "<Image_Info> \n")
-            filedata.insert(10, "<Width>1</Width> \n")
-            filedata.insert(11, "<Height>1</Height> \n")
-            filedata.insert(12, "<Pixels>1</Pixels> \n")
-            filedata.insert(13, "</Image_Info> \n")
-            with open(f"{DATADIR}{filename}_detector0.xhyperc", 'w') as file:
-                filedata = "".join(filedata)
-                file.write(filedata)
+        if scanType == 'point':    
+            response2 = input(colored("Would you like to modify the output files? (y/n): ", 'blue'))
+            if response2 == 'y':
+                with open(f"{DATADIR}{filename}_detector1.xhyperc", 'r') as file:
+                    filedata = file.readlines()
+                filedata.insert(9, "<Image_Info> \n")
+                filedata.insert(10, "<Width>1</Width> \n")
+                filedata.insert(11, "<Height>1</Height> \n")
+                filedata.insert(12, "<Pixels>1</Pixels> \n")
+                filedata.insert(13, "</Image_Info> \n")
+                with open(f"{DATADIR}{filename}_detector1.xhyperc", 'w') as file:
+                    filedata = "".join(filedata)
+                    file.write(filedata)
+                with open(f"{DATADIR}{filename}_detector0.xhyperc", 'r') as file:
+                    filedata = file.readlines()
+                filedata.insert(9,  "<Image_Info> \n")
+                filedata.insert(10, "<Width>1</Width> \n")
+                filedata.insert(11, "<Height>1</Height> \n")
+                filedata.insert(12, "<Pixels>1</Pixels> \n")
+                filedata.insert(13, "</Image_Info> \n")
+                with open(f"{DATADIR}{filename}_detector0.xhyperc", 'w') as file:
+                    filedata = "".join(filedata)
+                    file.write(filedata)
             response3 = input(colored("Open maxrf-spectra? (y/n): ", 'blue'))
             if response3 == 'y':
                 os.system('source /home/xrf/maxrf/this-iba-imaging.sh && maxrf-spectra')
