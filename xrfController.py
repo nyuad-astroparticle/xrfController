@@ -29,7 +29,7 @@ def printBanner():
  /\_/\_\ \_\  \ \_\     \ \____\ \____\ \_\ \_\ \__\ \_\ \____/\____/\____\ \____\ \_\ 
  \//\/_/\/_/   \/_/      \/____/\/___/ \/_/\/_/\/__/\/_/\/___/\/____\/____/\/____/\/_/ 
 =============================================================================================
-          ''', 'red'))
+          ''', 'green'))
 
 def runner():
     # Prety printing
@@ -37,14 +37,14 @@ def runner():
     printBanner()
     
     # Getting input parameters
-    print("Welcome to the XRF Contorl Interface \n")
-    filename    = input("Please enter filename: ")
-    scanType    = input("Please enter scantype: ").lower()
+    print(colored("Welcome to the XRF Contorl Interface \n", 'green'))
+    filename    = input(colored("Please enter filename: ", 'blue'))
+    scanType    = input(colored("Please enter scantype: ", 'blue')).lower()
     if scanType != 'point':
-        print("Sorry, raster scans are not supported right now")
+        print(colored("Sorry, raster scans are not supported right now", 'red'))
         return()
-    time        = input("Please enter scan duration in seconds: ")
-    helium      = input("Should Helium be turned on? (y/n) (default n): ")
+    time        = input(colored("Please enter scan duration in seconds: ", 'blue'))
+    helium      = input(colored("Should Helium be turned on? (y/n) (default n): ", 'blue'))
 
     #Setting input parameters
 
@@ -72,17 +72,22 @@ def runner():
     
     #Confirming input parameters
 
-    print(f'Name: {filename}' )
-    print(f'Time: {time}' )
-    print(f'Scan type: {scanType}')
-    response = input('Continue (y/n)?: ')
+    print(colored('Name:      ', 'blue'), colored(f'{filename}', 'red'))
+    print(colored('Time:      ', 'blue'), colored(f'{time}', 'red'))
+    print(colored('Scan type: ', 'blue'), colored(f'{scanType}', 'red'))
+    print(colored('Helium:    ', 'blue'), colored(f'{"True" if helium == "y" else "False"}', 'red'))
+
+
+
+
+    response = input(colored('Continue (y/n)?: ', 'blue'))
     if response == 'y':
         os.system(f'source /home/xrf/maxrf/this-iba-imaging.sh && daq_daemon {PROGRAMDIR}out.json') # Running daq_daeon with new json file
-        print("Scan done!")
+        print(colored("Scan done!", 'green'))
 
         # Adding image info tag to the output files
 
-        response2 = input("Would you like to modify the output files? (y/n): ")
+        response2 = input(colored("Would you like to modify the output files? (y/n): ", 'blue'))
         if response2 == 'y':
             with open(f"{DATADIR}{filename}_detector1.xhyperc", 'r') as file:
                 filedata = file.readlines()
@@ -104,7 +109,7 @@ def runner():
             with open(f"{DATADIR}{filename}_detector0.xhyperc", 'w') as file:
                 filedata = "".join(filedata)
                 file.write(filedata)
-            response3 = input("Open maxrf-spectra? (y/n): ")
+            response3 = input(colored("Open maxrf-spectra? (y/n): ", 'blue'))
             if response3 == 'y':
                 os.system('source /home/xrf/maxrf/this-iba-imaging.sh && maxrf-spectra')
 
@@ -112,13 +117,13 @@ def main():
     repTest = 0
     runner()
     while repTest == 0:
-        response = input("Would you like to run another scan? (y/n): ")
+        response = input(colored("Would you like to run another scan? (y/n): ", 'blue'))
         if response == 'y':
             runner()
         else:
             return()
 main()
-print("Bye!")
+print(colored("Bye!", 'green'))
 time.sleep(1)
 os.system("clear")
 
