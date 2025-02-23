@@ -81,7 +81,7 @@
     }
   ],
   "data_output": {
-    "base_filename": "testidkmanatp",
+    "base_filename": "test",
     "filepath": "/home/xrf/maxrf/data",
     "format": "XML-Hypercube",
     "include_channel_calibration_parameters": false,

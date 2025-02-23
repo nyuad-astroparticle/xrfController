@@ -1,8 +1,25 @@
 import sys
 import os
 import time
+from termcolor import colored
+
+PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
+DATADIR     = '/home/xrf/maxrf/data/' 
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 def printBanner():
-    print('''
+    print(colored( '''
 =============================================================================================
                __                           __              ___   ___                  
              /'___                         /\ \__          /\_ \ /\_ \                 
@@ -12,9 +29,7 @@ def printBanner():
  /\_/\_\ \_\  \ \_\     \ \____\ \____\ \_\ \_\ \__\ \_\ \____/\____/\____\ \____\ \_\ 
  \//\/_/\/_/   \/_/      \/____/\/___/ \/_/\/_/\/__/\/_/\/___/\/____\/____/\/____/\/_/ 
 =============================================================================================
-          ''')
-PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
-DATADIR     = '/home/xrf/maxrf/data/' 
+          ''', 'red'))
 
 def runner():
     # Prety printing
@@ -62,7 +77,7 @@ def runner():
     print(f'Scan type: {scanType}')
     response = input('Continue (y/n)?: ')
     if response == 'y':
-        os.system(f'daq_daemon {PROGRAMDIR}out.json') # Running daq_daeon with new json file
+        os.system(f'source /home/xrf/maxrf/this-iba-imaging.sh && daq_daemon {PROGRAMDIR}out.json') # Running daq_daeon with new json file
         print("Scan done!")
 
         # Adding image info tag to the output files
@@ -91,7 +106,7 @@ def runner():
                 file.write(filedata)
             response3 = input("Open maxrf-spectra? (y/n): ")
             if response3 == 'y':
-                os.system('maxrf-spectra')
+                os.system('source /home/xrf/maxrf/this-iba-imaging.sh && maxrf-spectra')
 
 def main():
     repTest = 0
