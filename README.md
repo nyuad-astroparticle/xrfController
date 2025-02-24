@@ -28,8 +28,11 @@ Here is a list of fields and their expected values
 |cellSize       | Float. (only for raster). Defaults to 0.5                 |
 |rasterSpeed    | Float. (only for raster). Defaults to 5                   |
 |helium         | y/n. Defults to n                                         |
+|voltage        | Float. Give xray tube voltage in kV to store in the json  |
+|current        | Float. Give xray tube current in uA to store in the json  |
 
 After all prompts are given to the program, it replaces the placeholders in the ```template.json``` file with the given values or their defaults and creates an ```out.json``` file.
+The program asks the user if they want to save the json file. By default, the program saves the json file in the ```JSONDIR``` folder.
 
 ## Warning system
 The next screen shows all the values supplied by the user to let them double check if everything is ok.
@@ -56,6 +59,3 @@ Then the program asks the user if they want to open ```maxrf-spectra```, and doe
 
 Finally the tool asks the user if they want to take another spectra. If the user says yes, the screen clears and the program starts over again.
 
-## Tips
-
-If you want to save a specific configuration, you can copy the ```out.json``` file to a safe location and use that directly with ```daq_daemon``` to repeat a scan without entering all the fields again.
