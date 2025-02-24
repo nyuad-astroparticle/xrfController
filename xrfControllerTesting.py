@@ -3,14 +3,13 @@ import os
 import time
 from termcolor import colored
 
-#PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
-#DATADIR     = '/home/xrf/maxrf/data/' 
-#JSONDIR     = '/home/xrf/maxrf/jsonOutputs/'
+PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
+DATADIR     = '/home/xrf/maxrf/data/' 
+JSONDIR     = '/home/xrf/maxrf/jsonOutputs/'
 
 
-PROGRAMDIR   = '/home/danish/Documents/xrfController/'
-DATADIR     = '/home/danish/Documents/testData/' 
-JSONDIR     = '/home/danish/Documents/jsonOutputs/'
+#PROGRAMDIR   = '/home/danish/Documents/xrfController/'
+#DATADIR     = '/home/danish/Documents/testData/' 
 
 CELLSIZEDEFAULT     = '0.5'
 RASTERSPEEDDEFAULT  = '5'
@@ -29,7 +28,7 @@ class bcolors:
 
 
 def printBanner():
-    print(colored( '''
+    print(colored(f'''
 =============================================================================================
                __                           __              ___   ___                  
              /'___                         /\ \__          /\_ \ /\_ \                 
@@ -39,6 +38,7 @@ def printBanner():
  /\_/\_\ \_\  \ \_\     \ \____\ \____\ \_\ \_\ \__\ \_\ \____/\____/\____\ \____\ \_\ 
  \//\/_/\/_/   \/_/      \/____/\/___/ \/_/\/_/\/__/\/_/\/___/\/____\/____/\/____/\/_/ 
 =============================================================================================
+Data Directory = {DATADIR}
           ''', 'magenta'))
 
 def runner():
