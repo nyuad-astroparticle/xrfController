@@ -76,6 +76,10 @@ def runner():
         helium = 'true'
     else:
         helium = HELIUMDEFAULT
+    if voltage == '':
+        voltage = '0'
+    if current == '':
+        current = '0'
 
     #Setting input parameters
 
@@ -149,6 +153,8 @@ def runner():
         print(colored("Cell Size                : ", 'blue'), colored(cellSize, 'red'))
         print(colored("Raster Speed             : ", 'blue'), colored(rasterSpeed, 'red'))
     print(colored('Helium:                    ', 'blue'), colored(helium, 'red'))
+    print(colored('Tube Voltage:              ', 'blue'), colored(voltage, 'red'))
+    print(colored('Tube Current:              ', 'blue'), colored(current, 'red'))
 
 
 

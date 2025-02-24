@@ -5,10 +5,12 @@ from termcolor import colored
 
 #PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
 #DATADIR     = '/home/xrf/maxrf/data/' 
+#JSONDIR     = '/home/xrf/maxrf/jsonOutputs/'
 
 
 PROGRAMDIR   = '/home/danish/Documents/xrfController/'
 DATADIR     = '/home/danish/Documents/testData/' 
+JSONDIR     = '/home/danish/Documents/jsonOutputs/'
 
 CELLSIZEDEFAULT     = '0.5'
 RASTERSPEEDDEFAULT  = '5'
@@ -37,7 +39,7 @@ def printBanner():
  /\_/\_\ \_\  \ \_\     \ \____\ \____\ \_\ \_\ \__\ \_\ \____/\____/\____\ \____\ \_\ 
  \//\/_/\/_/   \/_/      \/____/\/___/ \/_/\/_/\/__/\/_/\/___/\/____\/____/\/____/\/_/ 
 =============================================================================================
-          ''', 'green'))
+          ''', 'magenta'))
 
 def runner():
     # Prety printing
@@ -45,7 +47,7 @@ def runner():
     printBanner()
     
     # Getting input parameters
-    print(colored("Welcome to the XRF Contorl Interface \n", 'green'))
+    print(colored("Welcome to the XRF Control Interface \n", 'green'))
     filename    = input(colored("Please enter filename: ", 'blue')).strip()
     scanType    = input(colored("Please enter scantype: ", 'blue')).lower().strip()
     if scanType != 'point' and scanType!= 'raster':
@@ -61,6 +63,8 @@ def runner():
     if scanType == 'point':
         time         = input(colored("Please enter scan duration in seconds: ", 'blue'))
     helium      = input(colored(f"Should Helium be turned on? (y/n) (default {HELIUMDEFAULT}): ", 'blue'))
+    voltage     = input(colored(f"What voltage are you using?(kV) ", 'blue'))
+    current     = input(colored(f"What current are you using?(uA) ", 'blue'))
     
     #Setting defaults
     
@@ -73,6 +77,10 @@ def runner():
         helium = 'true'
     else:
         helium = HELIUMDEFAULT
+    if voltage == '':
+        voltage = '0'
+    if current == '':
+        current = '0'
 
     #Setting input parameters
 
@@ -92,19 +100,26 @@ def runner():
         filedata = filedata.replace("BASECELLSIZE", CELLSIZEDEFAULT)
         filedata = filedata.replace("BASERASTERSPEED", RASTERSPEEDDEFAULT)
     if scanType == 'raster':
-        filedata = filedata.replace("BASESCANTYPE", "Raster Spectrum")
+        filedata = filedata.replace("BASESCANTYPE", "Raster Scan")
         filedata = filedata.replace("BASEBOTTOMRIGHTX", bottomRightX)
         filedata = filedata.replace("BASEBOTTOMRIGHTY", bottomRightY)
         filedata = filedata.replace("BASETOPLEFTX", TopLeftX)
         filedata = filedata.replace("BASETOPLEFTY", TopLeftY)
         filedata = filedata.replace("BASECELLSIZE", cellSize)
         filedata = filedata.replace("BASERASTERSPEED", rasterSpeed)
-        filedata = filedata.replace("BASETIME", '1')    #This it to make sure that the output json file is formatted correctly. 
+        filedata = filedata.replace("BASETIME", '600')    #This it to make sure that the output json file is formatted correctly. 
                                                         #I don't know if it makes a difference 
     filedata = filedata.replace("BASEHELIUM", helium)
+    filedata = filedata.replace("BASEANODECURRENT", current)
+    filedata = filedata.replace("BASETUBEVOLTAGE", voltage)
 
     with open(f'{PROGRAMDIR}out.json', 'w') as file:
         file.write(filedata)
+
+    saveJson = input(colored('Do you want to save this .json file? (y/n) (default y): ', 'blue')).strip()
+    if saveJson != 'n': 
+        with open(f'{JSONDIR}{filename}.json', 'w') as file:
+            file.write(filedata)
     
     os.system("clear")
     printBanner()
@@ -139,6 +154,8 @@ def runner():
         print(colored("Cell Size                : ", 'blue'), colored(cellSize, 'red'))
         print(colored("Raster Speed             : ", 'blue'), colored(rasterSpeed, 'red'))
     print(colored('Helium:                    ', 'blue'), colored(helium, 'red'))
+    print(colored('Tube Voltage:              ', 'blue'), colored(voltage, 'red'))
+    print(colored('Tube Current:              ', 'blue'), colored(current, 'red'))
 
 
 

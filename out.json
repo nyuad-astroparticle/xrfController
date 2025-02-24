@@ -81,7 +81,7 @@
     }
   ],
   "data_output": {
-    "base_filename": "rasterTest4",
+    "base_filename": "test",
     "filepath": "/home/xrf/maxrf/data",
     "format": "XML-Hypercube",
     "include_channel_calibration_parameters": false,
@@ -146,15 +146,15 @@
     }
   },
   "params": {
-    "Mode": "Raster Scan",
+    "Mode": "Point Spectrum",
     "Point_Spectrum": {
-      "Acquisition_Time": 600,
+      "Acquisition_Time": 10,
       "Save_Refresh_Time": 0
     },
     "Raster_Scan": {
-      "bottom_right_corner_x_stage_coord": 105,
-      "bottom_right_corner_y_stage_coord": 105,
-      "cell_size": 1,
+      "bottom_right_corner_x_stage_coord": 100.0,
+      "bottom_right_corner_y_stage_coord": 100.0,
+      "cell_size": 0.5,
       "direction": "left-to-right",
       "horizontal_retrace": false,
       "raster_speed": 5,
@@ -165,8 +165,8 @@
         "enable_transmission_time_corrections": true,
         "sync_method": "software"
       },
-      "top_left_corner_x_stage_coord": 95,
-      "top_left_corner_y_stage_coord": 95
+      "top_left_corner_x_stage_coord": 0.0,
+      "top_left_corner_y_stage_coord": 0.0
     },
     "Spectrum_Channels": 16384
   }
