@@ -81,7 +81,7 @@
     }
   ],
   "data_output": {
-    "base_filename": "test",
+    "base_filename": "rasterTest4",
     "filepath": "/home/xrf/maxrf/data",
     "format": "XML-Hypercube",
     "include_channel_calibration_parameters": false,
@@ -134,30 +134,30 @@
     "sample_id": "NA",
     "telemeter_engaged": false,
     "xray_tube": {
-      "Anode Current": 30.0,
+      "Anode Current": 0,
       "Anode Material": "Molybdenum",
       "Controller": "FTC-200",
       "Current Unit": "uA",
       "Make": "MOXTEK",
       "Model": "TUB00046-MO5",
       "SN": "NA",
-      "Tube Voltage": 30.0,
+      "Tube Voltage": 0,
       "Voltage Unit": "kV"
     }
   },
   "params": {
-    "Mode": "Raster Spectrum",
+    "Mode": "Raster Scan",
     "Point_Spectrum": {
-      "Acquisition_Time": 1,
+      "Acquisition_Time": 600,
       "Save_Refresh_Time": 0
     },
     "Raster_Scan": {
-      "bottom_right_corner_x_stage_coord": m,
-      "bottom_right_corner_y_stage_coord": 1,
-      "cell_size": 0.3,
+      "bottom_right_corner_x_stage_coord": 105,
+      "bottom_right_corner_y_stage_coord": 105,
+      "cell_size": 1,
       "direction": "left-to-right",
       "horizontal_retrace": false,
-      "raster_speed": a,
+      "raster_speed": 5,
       "sync": {
         "enable_hardware_delay_corrections": true,
         "enable_motor_acceleration_corrections": true,
@@ -165,8 +165,8 @@
         "enable_transmission_time_corrections": true,
         "sync_method": "software"
       },
-      "top_left_corner_x_stage_coord": 0,
-      "top_left_corner_y_stage_coord": 0
+      "top_left_corner_x_stage_coord": 95,
+      "top_left_corner_y_stage_coord": 95
     },
     "Spectrum_Channels": 16384
   }

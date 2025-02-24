@@ -5,6 +5,7 @@ from termcolor import colored
 
 PROGRAMDIR   = '/home/xrf/maxrf/xrfController/'
 DATADIR     = '/home/xrf/maxrf/data/' 
+JSONDIR     = '/home/xrf/maxrf/jsonOutputs/'
 
 
 #PROGRAMDIR   = '/home/danish/Documents/xrfController/'
@@ -61,6 +62,8 @@ def runner():
     if scanType == 'point':
         time         = input(colored("Please enter scan duration in seconds: ", 'blue'))
     helium      = input(colored(f"Should Helium be turned on? (y/n) (default {HELIUMDEFAULT}): ", 'blue'))
+    voltage     = input(colored(f"What voltage are you using?(kV) ", 'blue'))
+    current     = input(colored(f"What current are you using?(uA) ", 'blue'))
     
     #Setting defaults
     
@@ -92,19 +95,26 @@ def runner():
         filedata = filedata.replace("BASECELLSIZE", CELLSIZEDEFAULT)
         filedata = filedata.replace("BASERASTERSPEED", RASTERSPEEDDEFAULT)
     if scanType == 'raster':
-        filedata = filedata.replace("BASESCANTYPE", "Raster Spectrum")
+        filedata = filedata.replace("BASESCANTYPE", "Raster Scan")
         filedata = filedata.replace("BASEBOTTOMRIGHTX", bottomRightX)
         filedata = filedata.replace("BASEBOTTOMRIGHTY", bottomRightY)
         filedata = filedata.replace("BASETOPLEFTX", TopLeftX)
         filedata = filedata.replace("BASETOPLEFTY", TopLeftY)
         filedata = filedata.replace("BASECELLSIZE", cellSize)
         filedata = filedata.replace("BASERASTERSPEED", rasterSpeed)
-        filedata = filedata.replace("BASETIME", '1')    #This it to make sure that the output json file is formatted correctly. 
+        filedata = filedata.replace("BASETIME", '600')    #This it to make sure that the output json file is formatted correctly. 
                                                         #I don't know if it makes a difference 
     filedata = filedata.replace("BASEHELIUM", helium)
+    filedata = filedata.replace("BASEANODECURRENT", current)
+    filedata = filedata.replace("BASETUBEVOLTAGE", voltage)
 
     with open(f'{PROGRAMDIR}out.json', 'w') as file:
         file.write(filedata)
+
+    saveJson = input(colored('Do you want to save this .json file? (y/n) (default y): ', 'blue')).strip()
+    if saveJson != 'n': 
+        with open(f'{JSONDIR}{filename}.json', 'w') as file:
+            file.write(filedata)
     
     os.system("clear")
     printBanner()

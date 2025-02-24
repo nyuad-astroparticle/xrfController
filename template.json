@@ -134,14 +134,14 @@
     "sample_id": "NA",
     "telemeter_engaged": false,
     "xray_tube": {
-      "Anode Current": 30.0,
+      "Anode Current": BASEANODECURRENT,
       "Anode Material": "Molybdenum",
       "Controller": "FTC-200",
       "Current Unit": "uA",
       "Make": "MOXTEK",
       "Model": "TUB00046-MO5",
       "SN": "NA",
-      "Tube Voltage": 30.0,
+      "Tube Voltage": BASETUBEVOLTAGE,
       "Voltage Unit": "kV"
     }
   },
