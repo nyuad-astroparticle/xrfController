@@ -81,7 +81,7 @@
     }
   ],
   "data_output": {
-    "base_filename": "test",
+    "base_filename": "balloon",
     "filepath": "/home/xrf/maxrf/data",
     "format": "XML-Hypercube",
     "include_channel_calibration_parameters": false,
@@ -127,7 +127,7 @@
         "window_thickness": 100.0
       } 
     ],
-    "helium_flow_engaged": false,
+    "helium_flow_engaged": true,
     "instrument_operator": "NA",
     "notes": "None",
     "sample_description": "Test sample",
@@ -148,7 +148,7 @@
   "params": {
     "Mode": "Point Spectrum",
     "Point_Spectrum": {
-      "Acquisition_Time": 10,
+      "Acquisition_Time": 500,
       "Save_Refresh_Time": 0
     },
     "Raster_Scan": {
