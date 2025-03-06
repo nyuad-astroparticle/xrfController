@@ -81,7 +81,7 @@
     }
   ],
   "data_output": {
-    "base_filename": "balloon",
+    "base_filename": "hamzaBrassTest",
     "filepath": "/home/xrf/maxrf/data",
     "format": "XML-Hypercube",
     "include_channel_calibration_parameters": false,
@@ -127,28 +127,28 @@
         "window_thickness": 100.0
       } 
     ],
-    "helium_flow_engaged": true,
+    "helium_flow_engaged": false,
     "instrument_operator": "NA",
     "notes": "None",
     "sample_description": "Test sample",
     "sample_id": "NA",
     "telemeter_engaged": false,
     "xray_tube": {
-      "Anode Current": 0,
+      "Anode Current": 15,
       "Anode Material": "Molybdenum",
       "Controller": "FTC-200",
       "Current Unit": "uA",
       "Make": "MOXTEK",
       "Model": "TUB00046-MO5",
       "SN": "NA",
-      "Tube Voltage": 0,
+      "Tube Voltage": 30,
       "Voltage Unit": "kV"
     }
   },
   "params": {
     "Mode": "Point Spectrum",
     "Point_Spectrum": {
-      "Acquisition_Time": 500,
+      "Acquisition_Time": 120,
       "Save_Refresh_Time": 0
     },
     "Raster_Scan": {
